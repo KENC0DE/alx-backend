@@ -4,6 +4,7 @@ Bable
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from typing import Optional, Dict, Any
 
 
 class Config(object):
@@ -28,10 +29,10 @@ users = {
 }
 
 
-def get_user():
+def get_user() -> Optional[Dict[str, Any]]:
     """
-    returns a user dictionary or None
-    if the ID cannot be found or if login_as was not passed
+    Returns a user dictionary or None if the ID
+    cannot be found or if login_as was not passed.
     """
     login_id = request.args.get('login_as')
     if login_id:
