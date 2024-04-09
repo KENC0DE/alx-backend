@@ -4,6 +4,8 @@ Bable
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from pytz import timezone
+import pytz.exceptions
 
 
 class Config(object):
@@ -65,10 +67,33 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+@babel.timezoneselector
+def get_timezone():
+    """
+    Select and return appropriate timezone
+    """
+    tzone = request.args.get('timezone', None)
+    if tzone:
+        try:
+            return timezone(tzone).zone
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    
+    if g.user:
+        try:
+            tzone = g.user.get('timezone')
+            return timezone(tzone).zone
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    
+    default_tz = app.config['BABEL_DEFAULT_TIMEZONE']
+    return default_tz
+
+
 @app.route('/')
 def index():
     """set lang"""
-    return render_template('6-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == '__main__':
