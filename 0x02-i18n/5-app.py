@@ -60,7 +60,7 @@ def get_locale():
 @app.route('/')
 def index():
     """set lang"""
-    return render_template('5-index.html', user=g.user)
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
