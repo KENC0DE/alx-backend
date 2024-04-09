@@ -10,11 +10,7 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def welCome() -> str:
     """Welcome Route"""
-    data = {
-        'ttl': 'Welcome to Holberton',
-        'msg': 'Hello world'
-    }
-    return render_template('0-index.html', data=data)
+    return render_template('0-index.html')
 
 
 if __name__ == '__main__':
