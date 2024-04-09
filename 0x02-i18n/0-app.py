@@ -11,7 +11,7 @@ app = Flask(__name__)
 def welCome() -> str:
     """Welcome Route"""
     data = {
-        'ttl': 'Welcom to Holberton',
+        'ttl': 'Welcome to Holberton',
         'msg': 'Hello world'
     }
     return render_template('0-index.html', data=data)
