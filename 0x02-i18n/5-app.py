@@ -42,8 +42,8 @@ def get_user():
 @app.before_request
 def before_request() -> None:
     """Executes before request"""
-    u = get_user()
-    g.user = u
+    user = get_user()
+    g.user = user
 
 
 @babel.localeselector
